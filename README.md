@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/simkimsia/UtilityBehaviors.png)](https://travis-ci.org/bretsko/OB500x)
+
 # 500px client with optional features
 
 
