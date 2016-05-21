@@ -8,6 +8,9 @@ When a table item is selected the photo is loaded and shown in a detail view.
 
 Frameworks used: Alamofire, AlamofireImage, SwiftyJSON, AsyncSwift, Result
 
+## Version 0.2 (branch "model") 
+
+Full model for an existing API is implemented and tested.
 
 
 
