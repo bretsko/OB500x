@@ -129,11 +129,11 @@
 		841519AB1CEF77FF0022B5FA /* OB500px */ = {
 			isa = PBXGroup;
 			children = (
-				84328A8C1CF0C82300A8B1F8 /* Model */,
 				841519AC1CEF77FF0022B5FA /* AppDelegate.swift */,
 				841519B01CEF77FF0022B5FA /* ImageViewController.swift */,
 				841519DE1CEF7B8B0022B5FA /* RequestRouter.swift */,
 				841519AE1CEF77FF0022B5FA /* TableViewController.swift */,
+				84328A8C1CF0C82300A8B1F8 /* Model */,
 				841519E01CEF85B90022B5FA /* Extensions */,
 				841519DC1CEF781D0022B5FA /* Supporting files */,
 			);
