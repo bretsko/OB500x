@@ -1,0 +1,7 @@
+language: objective-c  #1
+osx_image: xcode7.3 #2
+script: set -o pipefail && xcodebuild test -workspace OB500px.xcworkspace -scheme OB500px -sdk iphonesimulator9.3 | xcpretty
+
+# xcode_workspace: OB500px.xcworkspace #3
+# xcode_scheme: OB500px #4
+# xcode_sdk: iphonesimulator9.3 #5
