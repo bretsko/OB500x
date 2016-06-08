@@ -6,15 +6,12 @@
 //  Copyright © 2016 Bretsko. All rights reserved.
 //
 
-import Foundation
-
-import UIKit
 import Alamofire
 
 enum RequestRouter: URLRequestConvertible {
 
     static let baseURLString = "https://api.500px.com/v1"
-    static let consumerKey = "RHt6k1xdMMq5FGZyOlL9dxDzZLRnyNX1TjARx0Ll"
+    static let consumerKey = "MbhaNsMfhlJVGHvQzXBJhP4DsIGHkj6gkdLtRKBl"
 
     case PopularPhotos()
 
@@ -24,8 +21,6 @@ enum RequestRouter: URLRequestConvertible {
             switch self {
             case .PopularPhotos ():
                 let params = ["consumer_key": RequestRouter.consumerKey,
-
-                    // displaying only first page,
                     "page": "1",
                     "feature": "popular",
                     "rpp": "50",
@@ -40,4 +35,5 @@ enum RequestRouter: URLRequestConvertible {
 
         return encoding.encode(URLRequest, parameters: result.parameters).0
     }
+
 }

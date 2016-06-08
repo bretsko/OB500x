@@ -12,8 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-    var detailViewController: ImageViewController? = nil
-    var masterViewController: UITableViewController? = nil
+    var detailViewController: PhotoImageViewController? = nil
+    var masterViewController: PhotoTableViewController? = nil
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let splitViewController = self.window!.rootViewController as! UISplitViewController

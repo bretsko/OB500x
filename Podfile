@@ -10,10 +10,8 @@ end
 
 target 'OB500px' do
 
+pod 'ReactiveCocoa'
 pod 'Alamofire'
-pod 'AlamofireImage'
-pod 'AsyncSwift'
-pod 'Result'
 pod 'SwiftyJSON'
 
 end
