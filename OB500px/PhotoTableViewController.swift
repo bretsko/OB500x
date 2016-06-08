@@ -11,8 +11,6 @@ import UIKit
 
 public final class PhotoTableViewController: UITableViewController {
 
-  //  @IBOutlet internal weak var tableViewRef: UITableView!
-
     var detailViewController: PhotoImageViewController?
 
     var networkManager: NetworkManager?
@@ -27,6 +25,10 @@ public final class PhotoTableViewController: UITableViewController {
 
         self.networkManager = sharedNetworkManager
         self.viewModel = PhotoTableViewModel(networkManager: networkManager!)
+        self.tableView.registerNib(UINib(nibName: "TableCell", bundle: nil), forCellReuseIdentifier: "TableCellReuseIdentifier")
+
+
+           // self.tableView.registerClass(PhotoTableViewCell.self, forCellReuseIdentifier: "TableCell")
 
         self.tableView.delegate = self
         self.tableView.dataSource = self

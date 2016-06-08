@@ -12,16 +12,23 @@ extension PhotoTableViewController {
 
     public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("TableCellReuseIdentifier", forIndexPath: indexPath)
 
-        guard let vm = self.viewModel else {
-            return cell
+        if let cell = cell as? PhotoTableViewCell {
+
+            guard let vm = self.viewModel else {
+                return cell
+            }
+
+            vm.photosProducer.producer.startWithNext { photos in
+                let photo = photos![indexPath.row]
+
+                let vm = TableCellViewModel(photo: photo)
+                cell.viewModel = vm
+                //cell.textLabel!.text = photo.name
+            }
         }
 
-        vm.photosProducer.producer.startWithNext { photos in
-            let photo = photos![indexPath.row]
-            cell.textLabel!.text = photo.name
-        }
         return cell
     }
 
@@ -56,11 +63,9 @@ extension PhotoTableViewController {
             return 0
         }
         return count
-        
-    }
-    
 
-    
+    }
+
     public override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
@@ -69,4 +74,4 @@ extension PhotoTableViewController {
         return 1
     }
 
-   }
+}
