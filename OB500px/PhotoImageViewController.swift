@@ -12,6 +12,15 @@ class PhotoImageViewController: UIViewController {
 
     @IBOutlet var photoImageView: UIImageView!
 
+    @IBOutlet var authorLabel: UILabel!
+
+    @IBOutlet var photoNameLabel: UILabel!
+
+    @IBOutlet var likesLabel: UILabel!
+
+    // TODO: IBAction
+    @IBOutlet var photoDetailsButtons: UIButton!
+
     init(viewModel: PhotoImageViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,6 +36,10 @@ class PhotoImageViewController: UIViewController {
         }
     }
 
+    override internal func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
@@ -36,8 +49,18 @@ class PhotoImageViewController: UIViewController {
 
     func bindViewModel() {
 
-        self.viewModel.networkManager.requestImage(self.viewModel.photo.imageURL)
-            .on(next: { self.photoImageView.image = $0 })
+        let image_url = self.viewModel.photo.images.filter {
+            $0.size == ImageSize.Normal.rawValue
+        }.last!.url
+
+        SharedNetworkManager.requestImage(image_url).on(next: {
+            self.photoImageView.image = $0
+
+            self.photoNameLabel.text = self.viewModel.photo.name
+
+            self.authorLabel.text = self.viewModel.photo.user.username
+            self.likesLabel.text = String(self.viewModel.photo.votesCount)
+        })
             .start()
 
     }

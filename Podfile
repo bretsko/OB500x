@@ -13,7 +13,7 @@ target 'OB500px' do
 pod 'ReactiveCocoa'
 pod 'Alamofire'
 pod 'SwiftyJSON'
-
+pod 'Kingfisher'
 end
 
 

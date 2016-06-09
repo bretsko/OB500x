@@ -15,11 +15,8 @@ class PhotoImageViewModel {
     internal var image: UIImage?
 
     let photoImage = MutableProperty<UIImage?>(nil)
-
-    var networkManager: NetworkManager
-
-    init (photo: Photo, networkManager: NetworkManager) {
+    init (photo: Photo) {
         self.photo = photo
-        self.networkManager = networkManager
+
     }
 }

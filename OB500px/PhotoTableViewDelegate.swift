@@ -25,7 +25,6 @@ extension PhotoTableViewController {
 
                 let vm = TableCellViewModel(photo: photo)
                 cell.viewModel = vm
-                //cell.textLabel!.text = photo.name
             }
         }
 
@@ -43,7 +42,7 @@ extension PhotoTableViewController {
 
             guard let vc = self.detailViewController else { return }
 
-            let vm = PhotoImageViewModel(photo: photo, networkManager: self.viewModel.networkManager)
+            let vm = PhotoImageViewModel(photo: photo )
 
             vc.viewModel = vm;
 

@@ -15,14 +15,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="321" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vAN-8P-U73">
-                        <rect key="frame" x="212" y="0.0" width="100" height="99"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="SQh-O8-YOA"/>
-                        </constraints>
+                    <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" horizontalHuggingPriority="51" verticalHuggingPriority="51" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAN-8P-U73">
+                        <rect key="frame" x="135" y="13" width="176" height="86"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="304" translatesAutoresizingMaskIntoConstraints="NO" id="PNF-eN-rTE" userLabel="FileNameLabel">
-                        <rect key="frame" x="8" y="0.0" width="196" height="92"/>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="550" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="304" translatesAutoresizingMaskIntoConstraints="NO" id="PNF-eN-rTE" userLabel="FileNameLabel">
+                        <rect key="frame" x="13" y="13" width="114" height="84"/>
                         <string key="text">PhotoNameLabel
 </string>
                         <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="14"/>
@@ -31,13 +28,14 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="vAN-8P-U73" firstAttribute="leading" secondItem="PNF-eN-rTE" secondAttribute="trailing" constant="8" symbolic="YES" id="6a6-ae-R5V"/>
-                    <constraint firstItem="PNF-eN-rTE" firstAttribute="top" secondItem="vAN-8P-U73" secondAttribute="top" id="6n8-oa-At3"/>
+                    <constraint firstItem="vAN-8P-U73" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PNF-eN-rTE" secondAttribute="trailing" constant="5" id="3hw-Eq-rSw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vAN-8P-U73" secondAttribute="bottom" constant="3" id="9qY-35-mw3"/>
-                    <constraint firstItem="PNF-eN-rTE" firstAttribute="top" secondItem="igw-h4-Gx6" secondAttribute="top" id="CrP-oC-pte"/>
-                    <constraint firstItem="PNF-eN-rTE" firstAttribute="leading" secondItem="igw-h4-Gx6" secondAttribute="leadingMargin" id="Wfh-tD-rSd"/>
+                    <constraint firstItem="PNF-eN-rTE" firstAttribute="top" secondItem="igw-h4-Gx6" secondAttribute="topMargin" constant="5" id="Ayt-oC-Pyz"/>
+                    <constraint firstItem="vAN-8P-U73" firstAttribute="top" secondItem="igw-h4-Gx6" secondAttribute="topMargin" constant="5" id="HvA-Gs-W2i"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PNF-eN-rTE" secondAttribute="bottom" constant="5" id="MVj-rQ-3q7"/>
+                    <constraint firstItem="PNF-eN-rTE" firstAttribute="leading" secondItem="igw-h4-Gx6" secondAttribute="leadingMargin" constant="5" id="OQh-53-8Db"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vAN-8P-U73" secondAttribute="trailing" constant="1" id="b8g-x5-GhA"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="PNF-eN-rTE" secondAttribute="bottom" constant="10" id="y3M-Bi-Agd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vAN-8P-U73" secondAttribute="trailing" constant="5" id="zVS-hF-Tn6"/>
                 </constraints>
             </tableViewCellContentView>
             <accessibility key="accessibilityConfiguration" identifier="TableCell"/>

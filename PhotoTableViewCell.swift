@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 import ReactiveCocoa
 
 internal final class PhotoTableViewCell: UITableViewCell {
@@ -24,7 +23,7 @@ internal final class PhotoTableViewCell: UITableViewCell {
 
     func bindViewModel() {
         self.nameLabel.text = viewModel!.nameLabelText
-        // self.thumbnailImageView.image =
+        SharedNetworkManager.loadImageInView(self.thumbnailImageView!, url:  self.viewModel.image_url)
     }
 }
 

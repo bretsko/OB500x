@@ -13,8 +13,6 @@ public final class PhotoTableViewController: UITableViewController {
 
     var detailViewController: PhotoImageViewController?
 
-    var networkManager: NetworkManager?
-
     override public func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,12 +21,10 @@ public final class PhotoTableViewController: UITableViewController {
             self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? PhotoImageViewController
         }
 
-        self.networkManager = sharedNetworkManager
-        self.viewModel = PhotoTableViewModel(networkManager: networkManager!)
+        self.viewModel = PhotoTableViewModel()
         self.tableView.registerNib(UINib(nibName: "TableCell", bundle: nil), forCellReuseIdentifier: "TableCellReuseIdentifier")
 
-
-           // self.tableView.registerClass(PhotoTableViewCell.self, forCellReuseIdentifier: "TableCell")
+        self.tableView.rowHeight = 150
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -56,8 +52,3 @@ public final class PhotoTableViewController: UITableViewController {
     }
 }
 
-internal var sharedNetworkManager: NetworkManager {
-    struct Singleton {
-        static let instance = NetworkManager() }
-    return Singleton.instance
-}
