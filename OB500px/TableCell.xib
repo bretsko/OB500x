@@ -18,7 +18,7 @@
                     <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" horizontalHuggingPriority="51" verticalHuggingPriority="51" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAN-8P-U73">
                         <rect key="frame" x="135" y="13" width="176" height="86"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="550" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="304" translatesAutoresizingMaskIntoConstraints="NO" id="PNF-eN-rTE" userLabel="FileNameLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="50" verticalCompressionResistancePriority="50" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNF-eN-rTE" userLabel="FileNameLabel">
                         <rect key="frame" x="13" y="13" width="114" height="84"/>
                         <string key="text">PhotoNameLabel
 </string>
@@ -34,7 +34,6 @@
                     <constraint firstItem="vAN-8P-U73" firstAttribute="top" secondItem="igw-h4-Gx6" secondAttribute="topMargin" constant="5" id="HvA-Gs-W2i"/>
                     <constraint firstAttribute="bottomMargin" secondItem="PNF-eN-rTE" secondAttribute="bottom" constant="5" id="MVj-rQ-3q7"/>
                     <constraint firstItem="PNF-eN-rTE" firstAttribute="leading" secondItem="igw-h4-Gx6" secondAttribute="leadingMargin" constant="5" id="OQh-53-8Db"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="vAN-8P-U73" secondAttribute="trailing" constant="1" id="b8g-x5-GhA"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vAN-8P-U73" secondAttribute="trailing" constant="5" id="zVS-hF-Tn6"/>
                 </constraints>
             </tableViewCellContentView>

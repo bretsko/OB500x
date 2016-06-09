@@ -32,24 +32,7 @@ extension PhotoTableViewController {
     }
 
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-        guard let viewModel = self.viewModel else {
-            return
-        }
-
-        viewModel.photosProducer.producer.startWithNext { photos in
-            let photo = photos![indexPath.row]
-
-            guard let vc = self.detailViewController else { return }
-
-            let vm = PhotoImageViewModel(photo: photo )
-
-            vc.viewModel = vm;
-
-            self.navigationController?.pushViewController(vc, animated: true)
-
-        }
-
+        self.performSegueWithIdentifier("showDetail", sender: nil)
     }
 
     public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,7 +41,7 @@ extension PhotoTableViewController {
             return 0
         }
 
-        guard let count = viewModel.photosProducer.value?.count else {
+        guard let count = self.viewModel.photosProducer.value?.count else {
             return 0
         }
         return count

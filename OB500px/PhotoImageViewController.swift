@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ReactiveCocoa
+import Async
 
 class PhotoImageViewController: UIViewController {
 
@@ -21,7 +23,12 @@ class PhotoImageViewController: UIViewController {
     // TODO: IBAction
     @IBOutlet var photoDetailsButtons: UIButton!
 
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+
+    var viewModel: PhotoImageViewModel!
+
     init(viewModel: PhotoImageViewModel) {
+
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,40 +37,36 @@ class PhotoImageViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    var viewModel: PhotoImageViewModel! {
-        didSet {
-            self.bindViewModel()
-        }
-    }
-
-    override internal func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
         self.navigationItem.leftItemsSupplementBackButton = true
 
+        self.loadingIndicator.hidesWhenStopped = true
+        self.loadingIndicator.stopAnimating()
+        self.bindViewModel()
     }
 
     func bindViewModel() {
 
-        let image_url = self.viewModel.photo.images.filter {
-            $0.size == ImageSize.Normal.rawValue
-        }.last!.url
+        Async.main {
+            self.loadingIndicator.startAnimating()
+        }
 
-        SharedNetworkManager.requestImage(image_url).on(next: {
-            self.photoImageView.image = $0
+        self.viewModel.image.producer.startWithNext { image in
+            Async.main {
+                self.photoImageView.image = image
+            }
+        }
 
+        Async.main {
             self.photoNameLabel.text = self.viewModel.photo.name
 
             self.authorLabel.text = self.viewModel.photo.user.username
             self.likesLabel.text = String(self.viewModel.photo.votesCount)
-        })
-            .start()
 
+            self.loadingIndicator.stopAnimating()
+        }
     }
-
 }
 

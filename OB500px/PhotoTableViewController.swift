@@ -11,17 +11,11 @@ import UIKit
 
 public final class PhotoTableViewController: UITableViewController {
 
-    var detailViewController: PhotoImageViewController?
-
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? PhotoImageViewController
-        }
-
         self.viewModel = PhotoTableViewModel()
+
         self.tableView.registerNib(UINib(nibName: "TableCell", bundle: nil), forCellReuseIdentifier: "TableCellReuseIdentifier")
 
         self.tableView.rowHeight = 150
@@ -41,6 +35,7 @@ public final class PhotoTableViewController: UITableViewController {
     }
 
     func bindViewModel() {
+
         viewModel.photosProducer.producer
             .on(next: { _ in self.tableView.reloadData()
         }).start()
@@ -50,5 +45,27 @@ public final class PhotoTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
     }
+
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+
+                self.viewModel.photosProducer.producer.startWithNext { photos in
+                    let photo = photos![indexPath.row]
+
+                    let vc = (segue.destinationViewController as! UINavigationController).topViewController as! PhotoImageViewController
+
+                    let vm = PhotoImageViewModel(photo: photo)
+
+                    vc.viewModel = vm;
+
+                    vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                    vc.navigationItem.leftItemsSupplementBackButton = true
+
+                }
+            }
+        }
+    }
+
 }
 
