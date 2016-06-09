@@ -6,14 +6,16 @@
 //  Copyright © 2016 Bretsko. All rights reserved.
 //
 
-
 public final class TableCellViewModel {
 
-   // public let thumbnailImage: UIImage
-    public var nameLabelText: String
+    var nameLabelText: String
+    var image_url: String
 
     init (photo: Photo) {
         self.nameLabelText = photo.name
-        // self.thumbnailImage =
+
+        self.image_url = photo.images.filter {
+            $0.size == ImageSize.Thumbnail.rawValue
+        }.last!.url
     }
 }

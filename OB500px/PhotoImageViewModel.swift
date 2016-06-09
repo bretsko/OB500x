@@ -10,16 +10,32 @@ import ReactiveCocoa
 
 class PhotoImageViewModel {
 
-    internal let photo: Photo
+    let photo: Photo
+    // let photo = MutableProperty<Photo?>(nil)
+    var image = MutableProperty<UIImage?>(nil)
 
-    internal var image: UIImage?
-
-    let photoImage = MutableProperty<UIImage?>(nil)
-
-    var networkManager: NetworkManager
-
-    init (photo: Photo, networkManager: NetworkManager) {
+    init (photo: Photo) {
         self.photo = photo
-        self.networkManager = networkManager
+
+        let image_url = photo.images.filter {
+            $0.size == ImageSize.Normal.rawValue
+        }.last!.url
+
+//        self.image <~ SharedNetworkManager.requestImage(image_url).producer.first()?.value
+
+
+        SharedNetworkManager.requestImage(image_url).producer.startWithNext { image in
+
+            self.image.value = image
+
+            print ("Image loaded")
+        }
+
+//        SharedNetworkManager.requestImage(image_url).on(next: { image in
+//
+//            self.image.value = image
+//
+//        }).start()
     }
+
 }

@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import ReactiveCocoa
+import Async
 
 class PhotoImageViewController: UIViewController {
 
     @IBOutlet var photoImageView: UIImageView!
 
+    @IBOutlet var authorLabel: UILabel!
+
+    @IBOutlet var photoNameLabel: UILabel!
+
+    @IBOutlet var likesLabel: UILabel!
+
+    // TODO: IBAction
+    @IBOutlet var photoDetailsButtons: UIButton!
+
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+
+    var viewModel: PhotoImageViewModel!
+
     init(viewModel: PhotoImageViewModel) {
+
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,26 +37,36 @@ class PhotoImageViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    var viewModel: PhotoImageViewModel! {
-        didSet {
-            self.bindViewModel()
-        }
-    }
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
         self.navigationItem.leftItemsSupplementBackButton = true
 
+        self.loadingIndicator.hidesWhenStopped = true
+        self.loadingIndicator.stopAnimating()
+        self.bindViewModel()
     }
 
     func bindViewModel() {
 
-        self.viewModel.networkManager.requestImage(self.viewModel.photo.imageURL)
-            .on(next: { self.photoImageView.image = $0 })
-            .start()
+        Async.main {
+            self.loadingIndicator.startAnimating()
+        }
 
+        self.viewModel.image.producer.startWithNext { image in
+            Async.main {
+                self.photoImageView.image = image
+            }
+        }
+
+        Async.main {
+            self.photoNameLabel.text = self.viewModel.photo.name
+
+            self.authorLabel.text = self.viewModel.photo.user.username
+            self.likesLabel.text = String(self.viewModel.photo.votesCount)
+
+            self.loadingIndicator.stopAnimating()
+        }
     }
-
 }
 

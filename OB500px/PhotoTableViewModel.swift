@@ -8,19 +8,19 @@
 
 import ReactiveCocoa
 
+
 public class PhotoTableViewModel {
 
-    var networkManager: NetworkManager
 
     var photosProducer = MutableProperty<[Photo]?>(nil)
 
-    init (networkManager: NetworkManager) {
+    init () {
 
-        self.networkManager = networkManager
+        let image_sizes = [ImageSize.Normal, ImageSize.Thumbnail]
 
-        let requestURL: RequestRouter = RequestRouter.PopularPhotos()
+        let requestURL: RequestRouter = RequestRouter.PopularPhotos(image_sizes)
 
-        self.networkManager.requestSwiftyJSON(requestURL).producer.startWithNext { json in
+        SharedNetworkManager.requestSwiftyJSON(requestURL).producer.startWithNext { json in
             self.photosProducer.value = json["photos"].arrayValue.map { Photo(json: $0) }
         }
     }

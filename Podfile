@@ -9,11 +9,11 @@ end
 
 
 target 'OB500px' do
-
+pod 'AsyncSwift'
 pod 'ReactiveCocoa'
 pod 'Alamofire'
 pod 'SwiftyJSON'
-
+pod 'Kingfisher'
 end
 
 

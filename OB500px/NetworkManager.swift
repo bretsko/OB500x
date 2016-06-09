@@ -6,13 +6,13 @@
 //  Copyright © 2016 Bretsko. All rights reserved.
 //
 
-
 import ReactiveCocoa
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 public final class NetworkManager {
-     private let queue = dispatch_queue_create( "ResponseQueue",   DISPATCH_QUEUE_SERIAL)
+    private let queue = dispatch_queue_create("ResponseQueue", DISPATCH_QUEUE_SERIAL)
 
     public init() { }
 
@@ -66,4 +66,31 @@ public final class NetworkManager {
         }
     }
 
+    public func prefetchImages(stringURLs: [String]) {
+        let urls = stringURLs.map { NSURL(string: $0)! }
+        let prefetcher = ImagePrefetcher(urls: urls, optionsInfo: nil, progressBlock: nil, completionHandler: {
+            (skippedResources, failedResources, completedResources) -> () in
+            print("These resources are prefetched: \(completedResources)")
+        })
+        prefetcher.start()
+    }
+
+    public func prefetchImages(urls: [NSURL]) {
+        let prefetcher = ImagePrefetcher(urls: urls, optionsInfo: nil, progressBlock: nil, completionHandler: {
+            (skippedResources, failedResources, completedResources) -> () in
+            print("These resources are prefetched: \(completedResources)")
+        })
+        prefetcher.start()
+    }
+
+    public func loadImageInView(imageView: UIImageView, url: String) {
+        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: nil)
+    }
+}
+
+
+internal var SharedNetworkManager: NetworkManager {
+    struct Singleton {
+        static let instance = NetworkManager() }
+    return Singleton.instance
 }
