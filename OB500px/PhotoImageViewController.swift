@@ -25,12 +25,16 @@ class PhotoImageViewController: UIViewController {
 
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
 
-    var viewModel: PhotoImageViewModel!
+    var viewModel: PhotoImageViewModel? {
+        didSet {
+            guard (self.photoImageView != nil) else { return }
+            self.bindViewModel()
+        }
+    }
 
     init(viewModel: PhotoImageViewModel) {
-
-        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -43,30 +47,37 @@ class PhotoImageViewController: UIViewController {
         self.navigationItem.leftItemsSupplementBackButton = true
 
         self.loadingIndicator.hidesWhenStopped = true
-        self.loadingIndicator.stopAnimating()
+
+        Async.main {
+            self.loadingIndicator.stopAnimating()
+        }
+
         self.bindViewModel()
     }
 
     func bindViewModel() {
 
+        guard (self.viewModel != nil) else { return }
+
         Async.main {
             self.loadingIndicator.startAnimating()
         }
 
-        self.viewModel.image.producer.startWithNext { image in
+        SharedNetworkManager.requestImage(self.viewModel!.image_url).producer.startWithNext { image in
+
             Async.main {
+
                 self.photoImageView.image = image
+
+                self.photoNameLabel.text = self.viewModel!.photo.name
+
+                self.authorLabel.text = self.viewModel!.photo.user.username
+                self.likesLabel.text = String(self.viewModel!.photo.votesCount)
+
+                self.loadingIndicator.stopAnimating()
             }
         }
 
-        Async.main {
-            self.photoNameLabel.text = self.viewModel.photo.name
-
-            self.authorLabel.text = self.viewModel.photo.user.username
-            self.likesLabel.text = String(self.viewModel.photo.votesCount)
-
-            self.loadingIndicator.stopAnimating()
-        }
     }
 }
 

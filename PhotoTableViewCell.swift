@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Async
 
-internal final class PhotoTableViewCell: UITableViewCell {
+final class PhotoTableViewCell: UITableViewCell {
 
     @IBOutlet var thumbnailImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -20,8 +21,10 @@ internal final class PhotoTableViewCell: UITableViewCell {
     }
 
     func bindViewModel() {
-        self.nameLabel.text = viewModel!.nameLabelText
-        SharedNetworkManager.loadImageInView(self.thumbnailImageView!, url: self.viewModel.image_url)
+        Async.main {
+            self.nameLabel.text = self.viewModel!.nameLabelText
+            SharedNetworkManager.loadImageInView(self.thumbnailImageView!, url: self.viewModel.image_url)
+        }
     }
 }
 

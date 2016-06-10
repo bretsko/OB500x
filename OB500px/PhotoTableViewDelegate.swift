@@ -32,12 +32,34 @@ extension PhotoTableViewController {
     }
 
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showDetail", sender: nil)
+
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+
+            self.viewModel.photosProducer.producer.startWithNext { photos in
+
+                guard let photo = photos?[indexPath.row] else { return }
+
+                let vm = PhotoImageViewModel(photo: photo)
+
+                self.detailViewController!.viewModel = vm;
+
+                self.detailViewController!.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                self.detailViewController!.navigationItem.leftItemsSupplementBackButton = true
+                self.splitViewController!.showDetailViewController(self.detailViewController!, sender: nil)
+
+            }
+        }
+    }
+
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDetail" {
+
+        }
     }
 
     public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        guard let viewModel = self.viewModel else {
+        guard self.viewModel != nil else {
             return 0
         }
 

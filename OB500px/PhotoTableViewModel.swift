@@ -8,9 +8,7 @@
 
 import ReactiveCocoa
 
-
 public class PhotoTableViewModel {
-
 
     var photosProducer = MutableProperty<[Photo]?>(nil)
 

@@ -11,8 +11,8 @@
                 <splitViewController id="H1p-Uh-vWS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
-                        <segue destination="vC3-pB-5Vb" kind="relationship" relationship="detailViewController" id="Tll-UG-LXB"/>
                         <segue destination="7mT-dx-cyR" kind="relationship" relationship="masterViewController" id="OoQ-Wm-vgT"/>
+                        <segue destination="RKz-Iy-Mh6" kind="relationship" relationship="detailViewController" id="VgU-wy-fGI"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
@@ -22,7 +22,7 @@
         <!--Master-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="Master" useStoryboardIdentifierAsRestorationIdentifier="YES" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PhotoTableViewController" customModule="OB500px" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Master" modalTransitionStyle="flipHorizontal" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PhotoTableViewController" customModule="OB500px" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,28 +34,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Popular photos" id="Zdf-7t-Un8"/>
-                    <connections>
-                        <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" animates="NO" action="showViewController:sender:" id="xuD-MF-Gb4"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="889" y="-712"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="r7l-gg-dq7">
-            <objects>
-                <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="RKz-Iy-Mh6" kind="relationship" relationship="rootViewController" id="wug-Nn-KM7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="69" y="55"/>
         </scene>
         <!--Detail-->
         <scene sceneID="byN-ZX-gMY">
@@ -70,7 +52,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jjj-SF-HcW">
-                                <rect key="frame" x="5" y="66" width="590" height="526"/>
+                                <rect key="frame" x="5" y="66" width="590" height="570"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="xX9-0G-fJI">
                                         <rect key="frame" x="0.0" y="0.0" width="590" height="21"/>
@@ -90,18 +72,23 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-FA-cFW">
-                                        <rect key="frame" x="0.0" y="224" width="590" height="70"/>
+                                        <rect key="frame" x="0.0" y="256" width="590" height="50"/>
                                         <subviews>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iUI-v7-tIv">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iUI-v7-tIv">
                                                 <rect key="frame" x="0.0" y="0.0" width="590" height="20"/>
                                             </activityIndicatorView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hme-4z-BC7">
-                                                <rect key="frame" x="0.0" y="20" width="590" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="590" height="50"/>
                                             </imageView>
                                         </subviews>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="iUI-v7-tIv"/>
+                                            </mask>
+                                        </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="plc-Ov-xV3">
-                                        <rect key="frame" x="0.0" y="496" width="590" height="30"/>
+                                        <rect key="frame" x="0.0" y="540" width="590" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlF-i5-1D4">
                                                 <rect key="frame" x="0.0" y="0.0" width="47" height="30"/>
@@ -117,6 +104,9 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dJT-yh-kgZ">
+                                <rect key="frame" x="290" y="28" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -133,7 +123,7 @@
                     <connections>
                         <outlet property="authorLabel" destination="Il8-uk-qJ7" id="zJP-Ia-pVS"/>
                         <outlet property="likesLabel" destination="iAI-xg-ref" id="Dha-xc-gg6"/>
-                        <outlet property="loadingIndicator" destination="iUI-v7-tIv" id="aeQ-2v-fwJ"/>
+                        <outlet property="loadingIndicator" destination="dJT-yh-kgZ" id="2wS-WW-rBf"/>
                         <outlet property="photoDetailsButtons" destination="KlF-i5-1D4" id="dyL-21-l80"/>
                         <outlet property="photoImageView" destination="hme-4z-BC7" id="PqX-cV-Bel"/>
                         <outlet property="photoNameLabel" destination="Mtk-Ih-QUn" id="X36-Qv-Ffc"/>
@@ -141,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MxG-Bz-fdP" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="55"/>
+            <point key="canvasLocation" x="-23" y="93"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h07-Nr-oeJ">
@@ -162,7 +152,4 @@
             <point key="canvasLocation" x="49" y="-670"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="xuD-MF-Gb4"/>
-    </inferredMetricsTieBreakers>
 </document>

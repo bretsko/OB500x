@@ -19,32 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let splitViewController = self.window!.rootViewController as! UISplitViewController
 
-        let detailNavigationController = splitViewController.viewControllers[splitViewController.viewControllers.count - 1] as! UINavigationController
-
-        self.detailViewController = detailNavigationController.topViewController as? PhotoImageViewController
+        self.detailViewController = splitViewController.viewControllers[splitViewController.viewControllers.count - 1] as? PhotoImageViewController
 
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
 
         self.masterViewController = masterNavigationController.topViewController as? PhotoTableViewController
 
-       
+        self.masterViewController!.detailViewController = self.detailViewController
 
-//        self.masterViewController!.viewModel.photosProducer.producer.on(next: { photos in
-//            let vm = PhotoImageViewModel(photo: photos![0])
-//            self.detailViewController?.viewModel = vm
-//            // detailViewController?.photoImageView.image = photos![0]
-//        })
-
-        // var photosProducer = MutableProperty<[Photo]?>(nil)
-
-        // or bind with Reactive
-        // var photosProducer = MutableProperty<[Photo]?>(nil)
-
-        detailNavigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+        self.detailViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
 
         splitViewController.delegate = self
 
-        splitViewController.preferredDisplayMode = .PrimaryHidden
+        splitViewController.preferredDisplayMode = .PrimaryOverlay
 
         return true
     }

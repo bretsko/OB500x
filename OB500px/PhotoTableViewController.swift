@@ -11,6 +11,8 @@ import UIKit
 
 public final class PhotoTableViewController: UITableViewController {
 
+    var detailViewController : PhotoImageViewController?
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,26 +48,7 @@ public final class PhotoTableViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
 
-    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-
-                self.viewModel.photosProducer.producer.startWithNext { photos in
-                    let photo = photos![indexPath.row]
-
-                    let vc = (segue.destinationViewController as! UINavigationController).topViewController as! PhotoImageViewController
-
-                    let vm = PhotoImageViewModel(photo: photo)
-
-                    vc.viewModel = vm;
-
-                    vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                    vc.navigationItem.leftItemsSupplementBackButton = true
-
-                }
-            }
-        }
-    }
+    
 
 }
 
